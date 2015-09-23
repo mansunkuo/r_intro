@@ -387,14 +387,39 @@ li2$li[[1]]
 </div>
 
 
+## Exercise: options
+
+There are a lot of global option in your R environment.
+
+1. Please type `options()` to see what they are
+2. Create a list names op which is equal to the output of options()
+3. Use names(op) to see the names in op.
+4. Extract the component in op that named `digits`
+
+
+## Answer
+
+<div class="code_block">
+
+```{r}
+options()
+op <- options()
+names(op)
+op$digits
+```
+
+</div>
+
+
 ## Data Frame
 
 Data frame is a 2-dimension data structure to deal with a table-like heterogeneous data.
 
 ```{r}
 df <- data.frame(gender = c("male", "female", "female", "male"),
-                 age = c(33, 18, 24, 26),
-                 city = c("Taipei", "Taipei", "Hsinchu", "Taichung"))
+                 age = c(33, 18, 24, 26))
+## Add new column in a data frame
+df$city <- c("Taipei", "Taipei", "Hsinchu", "Taichung")
 ```
 
 <div class="columns-2">
@@ -423,9 +448,40 @@ df[df$gender == "female", c(2, 3)]
 </div>
 
 
+## Exercise: data frame
+
+[iris dataset](https://en.wikipedia.org/wiki/Iris_flower_data_set)
+is one of the most common dataset to be demo. 
+
+Use `data` to load default data set in R:
+
+```{r}
+data(iris)
+summary(iris)
+```
+
+Please accomplish following tasks:
+
+1. Create a data.frame named iris1 which the species is equal to **setosa**
+2. Create a data.frame named iris2 which the Sepal.Length is larger than 6.
+3. Create a data.frame named iris3 which only contains two columns, Sepal.Length and Sepal.Width.
+
+
+## Answer
+
+```{r}
+data(iris)
+iris1 <- iris[iris$Species == "setosa",]
+iris2 <- iris[iris$Sepal.Length > 6,]
+iris3 <- iris[, c("Sepal.Length", "Sepal.Width")]
+```
+
+
+
+
 ## Recap: data structure
 
-All data structures above are object.
+All data structures above are objects.
 They apply different methods and saved as different type internally.
 
 ```{r echo = FALSE}
@@ -459,6 +515,8 @@ knitr::kable(x)
   [yaml](http://cran.fhcrc.org/web/packages/yaml/index.html)
   to read a yaml file into list.
 - Use [XML](https://cran.r-project.org/web/packages/XML/index.html) to parse XML/HTML.
+- Use [cbind or rbind](https://stat.ethz.ch/R-manual/R-devel/library/base/html/cbind.html)
+  to combine matrixs of data frames.
 - Use 
   [reshape2](https://cran.r-project.org/web/packages/reshape2/index.html) and 
   [dplyr](https://cran.r-project.org/web/packages/dplyr/index.html)
@@ -467,10 +525,360 @@ knitr::kable(x)
   and total solution of ETL.
 
 
+# Function
+
+## Every operation is a function call
+
+*To understand computations in R, two slogans are helpful:*
+
+- *Everything that exists is an object.*
+- *Everything that happens is a function call."*
+
+*— John Chambers*
+
+<div class="columns-2">
+
+```{r}
+`+`
+`<-`
+`[`
+`c`
+```
+
+</div>
+
+
+## Some useful functions in R
+
+```{r}
+data(iris)  # Load default dataset in R
+```
+
+<div class="columns-2">
+
+```{r}
+mean(iris$Sepal.Length)
+sd(iris$Sepal.Length)
+max(iris$Sepal.Length)
+```
+
+<br>
+
+```{r}
+length(iris$Sepal.Length)
+quantile(iris$Sepal.Length)
+table(iris$Species)
+```
+
+
+</div>
+
+## Some useful functions in R - 2
+
+
+```{r}
+summary(iris)
+```
+
+
+## Function in R
+
+A typical function in R may look like:
+
+```{r}
+f <- function(arg1, arg2, ...) {
+    # Some magic happened
+    return()    # return something
+}
+```
+
+- If you don't use `return` to specify the return value, 
+  the return value will be the last expression inside the function.
+- Call by value by default  
+  send a copy of a object into a function and the input object won't change after execution without assignment
+- [First class object](https://en.wikipedia.org/wiki/First-class_citizen)
+     - Can be passed as arguments to other functions
+     - Can be nested
+
+
+## Exercise: Your first function
+
+Here is a simple function that compute the mean of specific columns in a data.frame
+
+```{r}
+colmean <- function(df, cname) {
+    out <- list(mean = mean(df[, cname]))
+    return(out)
+}
+colmean(iris, "Sepal.Length")
+```
+
+Please modify the function to return a list with both mean and standard deviation(sd)
+
+
+## Answer
+
+```{r}
+colmean <- function(df, cname) {
+    out <- list(mean = mean(df[, cname]),
+                sd = sd(df[, cname]))
+    return(out)
+}
+colmean(iris, "Sepal.Length")
+```
+
+
+# Control Flow
+
+## If
+
+The basc structure of conditional execution in R is:
+
+```r
+if (an expression returns TRUE or FALSE) {
+    # do something
+} else if (another expression returns TRUE or FALSE) {
+    # do something
+} else {
+    # do something
+}
+```
+
+## An example
+
+Here is a function to echo different string respect to x and y.
+
+```{r}
+printer <- function(x, y) {
+    if (x > y) {
+        print(sprintf("%s is great than %s", x, y))
+    } else if (x < y) {
+        print(sprintf("%s is less than %s", x, y))
+    } else {
+        print(sprintf("%s equals to %s", x, y))
+    }
+}
+printer(3.6, 9.8)
+```
+
+
+## Loops in R
+
+<img src="img/flowchart1.png" width=900>
+
+http://blog.datacamp.com/wp-content/uploads/2015/07/flowchart1.png
+
+
+## For
+
+You can use for loop with integer.
+
+
+```{r eval=TRUE}
+# loop with integer
+x <- c("a", "b", "c")
+v <- numeric(length(x))
+for (i in 1:length(x)) {
+    v[i] <- i
+}
+v
+```
+
+
+## Nested for loop
+
+loops can be nested.
+
+```{r}
+# nested loop
+m <- matrix(numeric(), nrow = 2, ncol = 2)
+for (i in 1:nrow(m)) {
+    for (j in 1:ncol(m)) {
+        m[i, j] <- i * j
+    }
+}
+m
+```
+
+
+## Exercise: nested for loop
+
+Please write a function that generate a n*n multiplication table with matrix
+
+
+## Answer
+
+```{r}
+# nested loop
+mtable <- function(n) {
+    m <- matrix(numeric(), nrow = n, ncol = n)
+    for (i in 1:nrow(m)) {
+        for (j in 1:ncol(m)) {
+            m[i, j] <- i * j
+        }
+    }
+    m
+}
+mtable(3)
+```
+
+
+## For loop with list and character vector
+
+For loop can iterate over objects other than numeric vector.
+
+```{r}
+# loop with list
+for (i in list(a = "a", b = 1:2)) {
+    print(i)
+}
+
+# loop with character vector
+for (i in c("a", "b", "c")) {
+    print(i)
+}
+```
+
+
+## Beyond for loop
+
+- Loop in R is not very efficient. Use vectorized function insteded if you can.
+
+```{r}
+library(rbenchmark)
+for_sum <- function(x) {
+    out <- 0
+    for (i in 1:length(x)) {
+        out<- out + i
+    }
+    return(out)
+}
+benchmark(sum(as.numeric(1:1000000)), for_sum(as.numeric(1:1000000)))
+```
+
+- Please visit [here](http://blog.datacamp.com/tutorial-on-loops-in-r/) if you are interested in
+  using other looping technique in R.
+  
+
+## tryCache
+
+tryCache let you deal with error handling in R.
+
+```r
+tryCatch({
+    result <- expr
+}, warning = function(w) {
+    # warning handling 
+}, error = function(e) {
+    # error handling 
+}, finally {
+    #  finally
+})
+```
+
+
+# Miscellaneous
+
+## Apply Family
+
+R works quite well with functional programming.
+
+Here is a function to get the class of elements' number in options:
+
+```{r}
+table(sapply(options(), FUN=function(x){class(x)}))
+```
+
+In most situation, apply family is faster than loop.
+
+Please refer to the 
+[tutorial of datacamp](http://blog.datacamp.com/r-tutorial-apply-family/) 
+if you are interested in it.
+
+## Expression
+
+Expression represents an action that can be performed by R.
+With expression you can do a lot of thing that is not easy to do with other language.
+
+```{r}
+x <- 3
+square_str <- "y <- x^2"   # a string
+square_expr <- parse(text = square_str) # an expression
+square_expr
+eval(square_expr)   # evaluate an R expression
+y
+```
+
+
+## Pipe
+
+Recently more and more package are written with pipe in R.
+You may pipe a value forward into an expression or function call.
+
+For example, to grab the urls on the index of [PTT FOOD](https://www.ptt.cc/bbs/Food/index.html):
+
+```{r}
+library(rvest)
+html("https://www.ptt.cc/bbs/Food/index.html") %>%
+    html_nodes(xpath = "/html/body/div[@id='main-container']/
+               div[@class='r-list-container bbs-screen']/
+               div[@class='r-ent']/div[@class='title']/a") %>%
+    html_attr(name = "href")
+```
+
+
+## Modeling
+
+[Formula](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/formula.html) 
+makes a complicated model can be abstracted easily.
+For example, to compute the adjusted R square:
+
+```{r}
+model <- lm(Sepal.Length ~ Petal.Length + Sepal.Width*Species, data = iris)
+summary(model)$adj.r.squared
+```
+
+Almost any kind of analytic packages can be founded in R. For example:
+
+- [glm](https://stat.ethz.ch/R-manual/R-patched/library/stats/html/glm.html): generalized linear regression 
+- [e1071](https://cran.r-project.org/web/packages/e1071/index.html): the Interface to libsvm
+- [glmnet](https://cran.r-project.org/web/packages/glmnet/index.html): Lasso and Elastic-Net Regularized Generalized Linear Models
+- [arules](https://cran.r-project.org/web/packages/arules/index.html): association rules and frequent itemset
+- [jiebaR](https://cran.r-project.org/web/packages/jiebaR/index.html): Chinese Text Segmentation
+
+
+## Visualization, reporting and Web application
+
+Visualization is one of most powerful R is. 
+Recently 
+You can easily use R to quick phototyping a web application.
+
+- [ggplot2](http://ggplot2.org/): Most popular graphic library in R. 
+    - [Dsc2015 ggplot2 Tutorial](http://everdark.github.io/ggplot2_lecture_dsc2015/)
+- [RMarkdown](http://rmarkdown.rstudio.com/): Reproducible research framework
+    - [Dsc2014 R Markdown Tutorial]()
+- [htmlwidget](http://www.htmlwidgets.org/): A framework for binding javascript library.
+- [Shiny](http://shiny.rstudio.com/): A web application framework for R
+
+
+## How to optimize your R code
+
+- Use Vectorized function rather than loop.
+- Choose packages that implemented with C, C++ or Fortran.
+- Use [RBenchmark](https://cran.r-project.org/web/packages/rbenchmark/index.html) to evaluate the execution time of  your functions
+- Rewrite your critical speed-killer with [Rcpp](https://cran.r-project.org/web/packages/Rcpp/index.html)
+- Take advantage of sparse matrix package such as 
+  [Matrix](https://cran.r-project.org/web/packages/Matrix/index.html) or
+  [Slam](https://cran.r-project.org/web/packages/slam/index.html) when dealing with sparse matrix.
+- Compile your functions into bytecode with package [compiler](http://dirk.eddelbuettel.com/blog/2011/04/12/)
+- [Parallel computing with R](https://cran.r-project.org/web/views/HighPerformanceComputing.html)
+
+
 ## References
 
 - [Advanced R](http://adv-r.had.co.nz/)
-- [An Introduction to R](https://cran.r-project.org/doc/manuals/r-release/R-intro.html)
-- [Quick-R](http://www.statmethods.net/)
 - [R Programming](https://www.coursera.org/course/rprog)
+- [The DataCamp Blog](http://blog.datacamp.com/)
+- [Quick-R](http://www.statmethods.net/)
+- [An Introduction to R](https://cran.r-project.org/doc/manuals/r-release/R-intro.html)
 
