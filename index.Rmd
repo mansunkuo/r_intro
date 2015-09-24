@@ -460,7 +460,7 @@ data(iris)
 summary(iris)
 ```
 
-Please accomplish following tasks:
+Please try following tasks:
 
 1. Create a data.frame named iris1 which the species is equal to **setosa**
 2. Create a data.frame named iris2 which the Sepal.Length is larger than 6.
@@ -649,7 +649,7 @@ if (an expression returns TRUE or FALSE) {
 Here is a function to echo different string respect to x and y.
 
 ```{r}
-printer <- function(x, y) {
+printer <- function(x, y = 0) {
     if (x > y) {
         print(sprintf("%s is great than %s", x, y))
     } else if (x < y) {
@@ -659,6 +659,7 @@ printer <- function(x, y) {
     }
 }
 printer(3.6, 9.8)
+printer(3.6)    # take y = 0
 ```
 
 

@@ -10,7 +10,7 @@
 
 
 
-  <meta name="date" content="2015-09-23" />
+  <meta name="date" content="2015-09-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -107,7 +107,7 @@
       <h1 data-config-title><!-- populated from slide_config.json --></h1>
       <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
       <p data-config-presenter><!-- populated from slide_config.json --></p>
-            <p style="margin-top: 6px; margin-left: -2px;">2015-09-23</p>
+            <p style="margin-top: 6px; margin-left: -2px;">2015-09-24</p>
           </hgroup>
   </slide>
 
@@ -889,7 +889,7 @@ summary(iris)</pre>
 ##                 
 ## </pre>
 
-<p>Please accomplish following tasks:</p>
+<p>Please try following tasks:</p>
 
 <ol>
 <li>Create a data.frame named iris1 which the species is equal to <strong>setosa</strong></li>
@@ -1110,7 +1110,7 @@ colmean(iris, &quot;Sepal.Length&quot;)</pre>
 
 <p>Here is a function to echo different string respect to x and y.</p>
 
-<pre class = 'prettyprint lang-r'>printer &lt;- function(x, y) {
+<pre class = 'prettyprint lang-r'>printer &lt;- function(x, y = 0) {
     if (x &gt; y) {
         print(sprintf(&quot;%s is great than %s&quot;, x, y))
     } else if (x &lt; y) {
@@ -1122,6 +1122,10 @@ colmean(iris, &quot;Sepal.Length&quot;)</pre>
 printer(3.6, 9.8)</pre>
 
 <pre >## [1] &quot;3.6 is less than 9.8&quot;</pre>
+
+<pre class = 'prettyprint lang-r'>printer(3.6)    # take y = 0</pre>
+
+<pre >## [1] &quot;3.6 is great than 0&quot;</pre>
 
 </article></slide><slide class=''><hgroup><h2>Loops in R</h2></hgroup><article  id="loops-in-r">
 
