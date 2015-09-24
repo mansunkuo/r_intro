@@ -34,7 +34,7 @@ knitr::opts_chunk$set(warning = TRUE,
 ## What is R
 
 - A free software environment for statistical computing and graphics
-- An open dource version of S language
+- An open source version of S language
 - An interpreted language builded with C, C++, Fortran and R
 - A general-purpose scripting language
 - Multi-paradigm
@@ -113,7 +113,7 @@ is a powerful IDE that make you more confortable with R.
 
 ## Assignment
 
-You may use `<-` or `=` to assign a value to a variable
+You can use `<-` or `=` to assign a value to a variable.
 
 ```{r}
 x <- 9.8
@@ -233,7 +233,7 @@ v1 + v2
 ## Recycle
 
 If you calculate tow vectors with different length, 
-the shorter vector will be recycled to the longer vector.
+the shorter vector will be recycled with the longer vector.
 
 ```{r}
 v3 <- c(2, 3)
@@ -280,7 +280,7 @@ attributes(v5)
 
 ## Subsetting: vector
 
-you can subset a vector in a various way.
+you can subset a vector in various ways.
 
 <div class="columns-2">
 
@@ -327,7 +327,7 @@ x %*% t(x)
 
 ## Subsetting: matrix
 
-You can subset a matrix in a various way.
+You can subset a matrix in various ways.
 
 <div class="columns-2">
 
@@ -345,7 +345,7 @@ x["b", 2]
 
 ## List
 
-Elements in a list can be any linds type and its length is arbitrary.
+Elements in a list can be any kinds type and its length is arbitrary.
 Function `str` can help you investigate the structure of a nested list.
 
 <div class="columns-2">
@@ -370,7 +370,7 @@ str(li2)
 
 ## Subsetting: list
 
-You can subset a data frame in a various way.
+You can subset a data frame in various ways.
 
 <div class="columns-2">
 
@@ -433,7 +433,7 @@ str(df)
 
 ## Subsetting: data frame
 
-You can subset a data frame in a various way.
+You can subset a data frame in various ways.
 <br>
 
 <div class="columns-2">
@@ -441,9 +441,16 @@ You can subset a data frame in a various way.
 ```{r}
 df[c(1, 3), "city"]
 df[3, c("gender", "age")]
+
+```
+
+<br>
+
+```{r}
 df$gender[c(2,3)]
 df[df$gender == "female", c(2, 3)]
 ```
+
 
 </div>
 
@@ -457,7 +464,6 @@ Use `data` to load default data set in R:
 
 ```{r}
 data(iris)
-summary(iris)
 ```
 
 Please try following tasks:
@@ -475,8 +481,6 @@ iris1 <- iris[iris$Species == "setosa",]
 iris2 <- iris[iris$Sepal.Length > 6,]
 iris3 <- iris[, c("Sepal.Length", "Sepal.Width")]
 ```
-
-
 
 
 ## Recap: data structure
@@ -646,7 +650,7 @@ if (an expression returns TRUE or FALSE) {
 
 ## An example
 
-Here is a function to echo different string respect to x and y.
+Here is a function to print different string respect to x and y.
 
 ```{r}
 printer <- function(x, y = 0) {
@@ -831,8 +835,8 @@ html("https://www.ptt.cc/bbs/Food/index.html") %>%
 ## Modeling
 
 [Formula](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/formula.html) 
-makes a complicated model can be abstracted easily.
-For example, to compute the adjusted R square:
+makes a complicated model can be described easily.
+For example, to compute the adjusted R square of a linear model:
 
 ```{r}
 model <- lm(Sepal.Length ~ Petal.Length + Sepal.Width*Species, data = iris)
@@ -848,11 +852,11 @@ Almost any kind of analytic packages can be founded in R. For example:
 - [jiebaR](https://cran.r-project.org/web/packages/jiebaR/index.html): Chinese Text Segmentation
 
 
-## Visualization, reporting and Web application
+## Visualization, reporting and web application
 
-Visualization is one of most powerful R is. 
-Recently 
-You can easily use R to quick phototyping a web application.
+Data visualization is one of the strength of R.
+Recently, a lot of packages had shifted to web-based solutions.
+You can use R to quick phototyping a web application.
 
 - [ggplot2](http://ggplot2.org/): Most popular graphic library in R. 
     - [Dsc2015 ggplot2 Tutorial](http://everdark.github.io/ggplot2_lecture_dsc2015/)
@@ -865,9 +869,9 @@ You can easily use R to quick phototyping a web application.
 ## How to optimize your R code
 
 - Use Vectorized function rather than loop.
-- Choose packages that implemented with C, C++ or Fortran.
 - Use [RBenchmark](https://cran.r-project.org/web/packages/rbenchmark/index.html) to evaluate the execution time of  your functions
 - Rewrite your critical speed-killer with [Rcpp](https://cran.r-project.org/web/packages/Rcpp/index.html)
+- Choose packages that implemented with higher performance packages or developed with low level languages.
 - Take advantage of sparse matrix package such as 
   [Matrix](https://cran.r-project.org/web/packages/Matrix/index.html) or
   [Slam](https://cran.r-project.org/web/packages/slam/index.html) when dealing with sparse matrix.

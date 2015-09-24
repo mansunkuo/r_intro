@@ -128,7 +128,7 @@
 
 <ul>
 <li>A free software environment for statistical computing and graphics</li>
-<li>An open dource version of S language</li>
+<li>An open source version of S language</li>
 <li>An interpreted language builded with C, C++, Fortran and R</li>
 <li>A general-purpose scripting language</li>
 <li>Multi-paradigm
@@ -204,7 +204,7 @@
 
 </article></slide><slide class=''><hgroup><h2>Assignment</h2></hgroup><article  id="assignment">
 
-<p>You may use <code>&lt;-</code> or <code>=</code> to assign a value to a variable</p>
+<p>You can use <code>&lt;-</code> or <code>=</code> to assign a value to a variable.</p>
 
 <pre class = 'prettyprint lang-r'>x &lt;- 9.8
 y = 689
@@ -350,7 +350,7 @@ v2</pre>
 
 </article></slide><slide class=''><hgroup><h2>Recycle</h2></hgroup><article  id="recycle">
 
-<p>If you calculate tow vectors with different length, the shorter vector will be recycled to the longer vector.</p>
+<p>If you calculate tow vectors with different length, the shorter vector will be recycled with the longer vector.</p>
 
 <pre class = 'prettyprint lang-r'>v3 &lt;- c(2, 3)
 v1^v3</pre>
@@ -407,7 +407,7 @@ v5</pre>
 
 </article></slide><slide class=''><hgroup><h2>Subsetting: vector</h2></hgroup><article  id="subsetting-vector">
 
-<p>you can subset a vector in a various way.</p>
+<p>you can subset a vector in various ways.</p>
 
 <div class="columns-2">
 <pre class = 'prettyprint lang-r'>v5[c(5, 2, 6)]</pre>
@@ -471,7 +471,7 @@ x %*% t(x)  </pre>
 
 </article></slide><slide class=''><hgroup><h2>Subsetting: matrix</h2></hgroup><article  id="subsetting-matrix">
 
-<p>You can subset a matrix in a various way.</p>
+<p>You can subset a matrix in various ways.</p>
 
 <div class="columns-2">
 <pre class = 'prettyprint lang-r'>x[1, ]</pre>
@@ -503,7 +503,7 @@ x %*% t(x)  </pre>
 
 </article></slide><slide class=''><hgroup><h2>List</h2></hgroup><article  id="list">
 
-<p>Elements in a list can be any linds type and its length is arbitrary. Function <code>str</code> can help you investigate the structure of a nested list.</p>
+<p>Elements in a list can be any kinds type and its length is arbitrary. Function <code>str</code> can help you investigate the structure of a nested list.</p>
 
 <div class="columns-2">
 <pre class = 'prettyprint lang-r'>li &lt;- list(a = 1:10, 
@@ -528,7 +528,7 @@ str(li2)</pre>
 
 </article></slide><slide class=''><hgroup><h2>Subsetting: list</h2></hgroup><article  id="subsetting-list">
 
-<p>You can subset a data frame in a various way.</p>
+<p>You can subset a data frame in various ways.</p>
 
 <div class="columns-2">
 <pre class = 'prettyprint lang-r'>li2$li$a</pre>
@@ -841,18 +841,19 @@ df$city &lt;- c(&quot;Taipei&quot;, &quot;Taipei&quot;, &quot;Hsinchu&quot;, &qu
 
 </article></slide><slide class=''><hgroup><h2>Subsetting: data frame</h2></hgroup><article  id="subsetting-data-frame">
 
-<p>You can subset a data frame in a various way. <br></p>
+<p>You can subset a data frame in various ways. <br></p>
 
 <div class="columns-2">
 <pre class = 'prettyprint lang-r'>df[c(1, 3), &quot;city&quot;]</pre>
 
-<pre >## [1] Taipei  Hsinchu
-## Levels: Hsinchu Taichung Taipei</pre>
+<pre >## [1] &quot;Taipei&quot;  &quot;Hsinchu&quot;</pre>
 
 <pre class = 'prettyprint lang-r'>df[3, c(&quot;gender&quot;, &quot;age&quot;)]</pre>
 
 <pre >##   gender age
 ## 3 female  24</pre>
+
+<p><br></p>
 
 <pre class = 'prettyprint lang-r'>df$gender[c(2,3)]</pre>
 
@@ -871,23 +872,7 @@ df$city &lt;- c(&quot;Taipei&quot;, &quot;Taipei&quot;, &quot;Hsinchu&quot;, &qu
 
 <p>Use <code>data</code> to load default data set in R:</p>
 
-<pre class = 'prettyprint lang-r'>data(iris)
-summary(iris)</pre>
-
-<pre >##   Sepal.Length    Sepal.Width     Petal.Length    Petal.Width   
-##  Min.   :4.300   Min.   :2.000   Min.   :1.000   Min.   :0.100  
-##  1st Qu.:5.100   1st Qu.:2.800   1st Qu.:1.600   1st Qu.:0.300  
-##  Median :5.800   Median :3.000   Median :4.350   Median :1.300  
-##  Mean   :5.843   Mean   :3.057   Mean   :3.758   Mean   :1.199  
-##  3rd Qu.:6.400   3rd Qu.:3.300   3rd Qu.:5.100   3rd Qu.:1.800  
-##  Max.   :7.900   Max.   :4.400   Max.   :6.900   Max.   :2.500  
-##        Species  
-##  setosa    :50  
-##  versicolor:50  
-##  virginica :50  
-##                 
-##                 
-## </pre>
+<pre class = 'prettyprint lang-r'>data(iris)</pre>
 
 <p>Please try following tasks:</p>
 
@@ -1108,7 +1093,7 @@ colmean(iris, &quot;Sepal.Length&quot;)</pre>
 
 </article></slide><slide class=''><hgroup><h2>An example</h2></hgroup><article  id="an-example">
 
-<p>Here is a function to echo different string respect to x and y.</p>
+<p>Here is a function to print different string respect to x and y.</p>
 
 <pre class = 'prettyprint lang-r'>printer &lt;- function(x, y = 0) {
     if (x &gt; y) {
@@ -1225,11 +1210,11 @@ for_sum &lt;- function(x) {
 benchmark(sum(as.numeric(1:1000000)), for_sum(as.numeric(1:1000000)))</pre>
 
 <pre >##                           test replications elapsed relative user.self
-## 2 for_sum(as.numeric(1:1e+06))          100  46.130   52.302    38.604
-## 1     sum(as.numeric(1:1e+06))          100   0.882    1.000     0.696
+## 2 for_sum(as.numeric(1:1e+06))          100  39.308   46.684    34.452
+## 1     sum(as.numeric(1:1e+06))          100   0.842    1.000     0.704
 ##   sys.self user.child sys.child
-## 2    0.026          0         0
-## 1    0.021          0         0</pre>
+## 2    0.010          0         0
+## 1    0.004          0         0</pre>
 
 <ul>
 <li>Please visit <a href='http://blog.datacamp.com/tutorial-on-loops-in-r/' title=''>here</a> if you are interested in using other looping technique in R.</li>
@@ -1296,35 +1281,25 @@ html(&quot;https://www.ptt.cc/bbs/Food/index.html&quot;) %&gt;%
                div[@class=&#39;r-ent&#39;]/div[@class=&#39;title&#39;]/a&quot;) %&gt;%
     html_attr(name = &quot;href&quot;)</pre>
 
-<pre >##  [1] &quot;/bbs/Food/M.1442985684.A.A9C.html&quot;
-##  [2] &quot;/bbs/Food/M.1442991064.A.A64.html&quot;
-##  [3] &quot;/bbs/Food/M.1442991193.A.C22.html&quot;
-##  [4] &quot;/bbs/Food/M.1442991397.A.C42.html&quot;
-##  [5] &quot;/bbs/Food/M.1442991549.A.9F1.html&quot;
-##  [6] &quot;/bbs/Food/M.1442991986.A.DC5.html&quot;
-##  [7] &quot;/bbs/Food/M.1442992106.A.96D.html&quot;
-##  [8] &quot;/bbs/Food/M.1442993620.A.5EF.html&quot;
-##  [9] &quot;/bbs/Food/M.1442994696.A.C6C.html&quot;
-## [10] &quot;/bbs/Food/M.1442995519.A.7D9.html&quot;
-## [11] &quot;/bbs/Food/M.1442997551.A.366.html&quot;
-## [12] &quot;/bbs/Food/M.1443002279.A.D18.html&quot;
-## [13] &quot;/bbs/Food/M.1443002492.A.FE1.html&quot;
-## [14] &quot;/bbs/Food/M.1443003037.A.24B.html&quot;
-## [15] &quot;/bbs/Food/M.1443006221.A.844.html&quot;
-## [16] &quot;/bbs/Food/M.1443008057.A.79A.html&quot;
-## [17] &quot;/bbs/Food/M.1443008772.A.770.html&quot;
-## [18] &quot;/bbs/Food/M.1443009556.A.DD5.html&quot;
-## [19] &quot;/bbs/Food/M.1443011348.A.473.html&quot;
-## [20] &quot;/bbs/Food/M.1443012841.A.458.html&quot;
-## [21] &quot;/bbs/Food/M.1355673582.A.5F7.html&quot;
-## [22] &quot;/bbs/Food/M.1037553999.A.D7B.html&quot;
-## [23] &quot;/bbs/Food/M.1190944426.A.E6C.html&quot;
-## [24] &quot;/bbs/Food/M.1128132666.A.0FD.html&quot;
-## [25] &quot;/bbs/Food/M.1413030211.A.ADF.html&quot;</pre>
+<pre >##  [1] &quot;/bbs/Food/M.1443073093.A.626.html&quot;
+##  [2] &quot;/bbs/Food/M.1443073371.A.310.html&quot;
+##  [3] &quot;/bbs/Food/M.1443077508.A.609.html&quot;
+##  [4] &quot;/bbs/Food/M.1443077827.A.6C6.html&quot;
+##  [5] &quot;/bbs/Food/M.1443079646.A.734.html&quot;
+##  [6] &quot;/bbs/Food/M.1443080133.A.2DB.html&quot;
+##  [7] &quot;/bbs/Food/M.1443081234.A.C99.html&quot;
+##  [8] &quot;/bbs/Food/M.1443082737.A.002.html&quot;
+##  [9] &quot;/bbs/Food/M.1443085165.A.5CE.html&quot;
+## [10] &quot;/bbs/Food/M.1443085908.A.4E0.html&quot;
+## [11] &quot;/bbs/Food/M.1355673582.A.5F7.html&quot;
+## [12] &quot;/bbs/Food/M.1037553999.A.D7B.html&quot;
+## [13] &quot;/bbs/Food/M.1190944426.A.E6C.html&quot;
+## [14] &quot;/bbs/Food/M.1128132666.A.0FD.html&quot;
+## [15] &quot;/bbs/Food/M.1413030211.A.ADF.html&quot;</pre>
 
 </article></slide><slide class=''><hgroup><h2>Modeling</h2></hgroup><article  id="modeling">
 
-<p><a href='https://stat.ethz.ch/R-manual/R-devel/library/stats/html/formula.html' title=''>Formula</a> makes a complicated model can be abstracted easily. For example, to compute the adjusted R square:</p>
+<p><a href='https://stat.ethz.ch/R-manual/R-devel/library/stats/html/formula.html' title=''>Formula</a> makes a complicated model can be described easily. For example, to compute the adjusted R square of a linear model:</p>
 
 <pre class = 'prettyprint lang-r'>model &lt;- lm(Sepal.Length ~ Petal.Length + Sepal.Width*Species, data = iris)
 summary(model)$adj.r.squared</pre>
@@ -1341,9 +1316,9 @@ summary(model)$adj.r.squared</pre>
 <li><a href='https://cran.r-project.org/web/packages/jiebaR/index.html' title=''>jiebaR</a>: Chinese Text Segmentation</li>
 </ul>
 
-</article></slide><slide class=''><hgroup><h2>Visualization, reporting and Web application</h2></hgroup><article  id="visualization-reporting-and-web-application">
+</article></slide><slide class=''><hgroup><h2>Visualization, reporting and web application</h2></hgroup><article  id="visualization-reporting-and-web-application">
 
-<p>Visualization is one of most powerful R is. Recently You can easily use R to quick phototyping a web application.</p>
+<p>Data visualization is one of the strength of R. Recently, a lot of packages had shifted to web-based solutions. You can use R to quick phototyping a web application.</p>
 
 <ul>
 <li><a href='http://ggplot2.org/' title=''>ggplot2</a>: Most popular graphic library in R.
@@ -1364,9 +1339,9 @@ summary(model)$adj.r.squared</pre>
 
 <ul>
 <li>Use Vectorized function rather than loop.</li>
-<li>Choose packages that implemented with C, C++ or Fortran.</li>
 <li>Use <a href='https://cran.r-project.org/web/packages/rbenchmark/index.html' title=''>RBenchmark</a> to evaluate the execution time of your functions</li>
 <li>Rewrite your critical speed-killer with <a href='https://cran.r-project.org/web/packages/Rcpp/index.html' title=''>Rcpp</a></li>
+<li>Choose packages that implemented with higher performance packages or developed with low level languages.</li>
 <li>Take advantage of sparse matrix package such as <a href='https://cran.r-project.org/web/packages/Matrix/index.html' title=''>Matrix</a> or <a href='https://cran.r-project.org/web/packages/slam/index.html' title=''>Slam</a> when dealing with sparse matrix.</li>
 <li>Compile your functions into bytecode with package <a href='http://dirk.eddelbuettel.com/blog/2011/04/12/' title=''>compiler</a></li>
 <li><a href='https://cran.r-project.org/web/views/HighPerformanceComputing.html' title=''>Parallel computing with R</a></li>
